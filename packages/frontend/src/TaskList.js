@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
-  List, ListItem, ListItemText, IconButton, Checkbox, Typography, Box, CircularProgress, Paper, Chip
+  List, ListItem, ListItemText, IconButton, Checkbox, Typography, Box, CircularProgress, Paper, Chip, Button
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EventIcon from '@mui/icons-material/Event';
 
-function TaskList({ onEdit }) {
+function TaskList({ onEdit, onPriorityChange }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -63,6 +63,8 @@ function TaskList({ onEdit }) {
       setError('Failed to delete task');
     }
   };
+
+
 
   if (loading) return (
     <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
@@ -127,7 +129,7 @@ function TaskList({ onEdit }) {
           <ListItem 
             key={task.id} 
             sx={{ 
-              pr: 18,
+              pr: 26,
               py: 1,
               mb: 1,
               borderRadius: 2,
@@ -203,6 +205,32 @@ function TaskList({ onEdit }) {
                 gap: 1
               }}
             >
+              <Box display="flex" gap={0.5}>
+                {['P1', 'P2', 'P3'].map((level) => (
+                  <Button
+                    key={level}
+                    size="small"
+                    onClick={() => onPriorityChange(task.id, level)}
+                    sx={{
+                      minWidth: 32,
+                      height: 22,
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      px: 0.5,
+                      py: 0,
+                      borderRadius: 1,
+                      textTransform: 'none',
+                      backgroundColor: (task.priority || 'P3') === level ? '#07F2E6' : '#7A7A7A',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: (task.priority || 'P3') === level ? '#06d9ce' : '#606060',
+                      },
+                    }}
+                  >
+                    {level}
+                  </Button>
+                ))}
+              </Box>
               {task.due_date && (
                 <Chip
                   icon={<EventIcon sx={{ fontSize: 14 }} />}

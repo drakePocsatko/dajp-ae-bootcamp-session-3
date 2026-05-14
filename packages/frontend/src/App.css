@@ -92,3 +92,30 @@ li:last-child {
   color: #d32f2f;
   font-weight: bold;
 }
+
+/* Priority button colors derived from priority-field-ui-sketch.png */
+.priority-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+.priority-btn-selected {
+  background-color: #07F2E6;
+}
+
+.priority-btn-selected:hover {
+  background-color: #06d9ce;
+}
+
+.priority-btn-unselected {
+  background-color: #7A7A7A;
+}
+
+.priority-btn-unselected:hover {
+  background-color: #606060;
+}
